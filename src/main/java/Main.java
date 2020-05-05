@@ -18,7 +18,6 @@ public class Main {
             System.out.println("改行つなぎ：\n" + Vertical.print(word));
         } else {
             throw new RuntimeException("想定外の出力オプションです");
-//        }
         }
     }
 }
