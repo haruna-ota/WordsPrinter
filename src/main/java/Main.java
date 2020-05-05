@@ -13,11 +13,12 @@ public class Main {
         String printOption = list.get(1);
 
         if (printOption.equals("--horizontal")) {
-            Horizontal.print(word);
+            System.out.println("半角つなぎ：\n" + Horizontal.print(word));
         } else if (printOption.equals("--vertical")) {
-            Vertical.print(word);
+            System.out.println("改行つなぎ：\n" + Vertical.print(word));
         } else {
             throw new RuntimeException("想定外の出力オプションです");
+//        }
         }
     }
 }
