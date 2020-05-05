@@ -25,7 +25,7 @@ public class Main {
             } else if (convertOption.equals("--reverse")) {
                 return (Horizontal.print(Reverse.convert(word)));
             } else {
-                throw new RuntimeException("想定外の変化オプションです");
+                throw new RuntimeException("想定外の変換オプションです");
             }
         } else if (printOption.equals("--vertical")) {
             if (convertOption.equals("--capitalize")) {
@@ -33,7 +33,7 @@ public class Main {
             } else if (convertOption.equals("--reverse")) {
                 return (Vertical.print(Reverse.convert(word)));
             } else {
-                throw new RuntimeException("想定外の変化オプションです");
+                throw new RuntimeException("想定外の変換オプションです");
             }
         } else {
             throw new RuntimeException("想定外の出力オプションです");

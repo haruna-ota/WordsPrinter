@@ -14,4 +14,22 @@ class MainTest extends Specification {
         ["hello", "world"] | "--capitalize" | "--vertical"   | "Hello\nWorld"
         ["hello", "world"] | "--reverse"    | "--vertical"   | "world\nhello"
     }
+
+    def "PrintWord変換例外発生"() {
+        when:
+        Main.printWord(["hello", "world"], "--none", "--horizontal")
+
+        then:
+        RuntimeException e = thrown()
+        e.getMessage() == "想定外の変換オプションです"
+    }
+
+    def "PrintWord出力例外発生"() {
+        when:
+        Main.printWord(["hello", "world"], "--reverse", "--none")
+
+        then:
+        RuntimeException e = thrown()
+        e.getMessage() == "想定外の出力オプションです"
+    }
 }
