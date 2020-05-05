@@ -3,6 +3,7 @@ import convert.Reverse;
 import print.Horizontal;
 import print.Vertical;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,9 +12,21 @@ import java.util.stream.Stream;
 public class Main {
     public static void main(String[] args) {
         List<String> list = Arrays.asList(args);
-        List<String> word = Stream.of(list.get(0).split(" ")).collect(Collectors.toList());
-        String convertOption = list.get(1);
-        String printOption = list.get(2);
+
+        String convertOption = null;
+        String printOption = null;
+        List<String> word = new ArrayList<>();
+
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).equals("--horizontal") || list.get(i).equals("--vertical")) {
+                printOption = list.get(i);
+            } else if (list.get(i).equals("--capitalize") || list.get(i).equals("--reverse")) {
+                convertOption = list.get(i);
+            } else {
+                word = Stream.of(list.get(i).split(" ")).collect(Collectors.toList());
+            }
+        }
+
         System.out.println(word + " " + convertOption + " " + printOption);
         System.out.println(printWord(word, convertOption, printOption));
     }
