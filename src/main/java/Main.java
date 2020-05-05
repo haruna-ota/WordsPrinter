@@ -1,3 +1,5 @@
+import convert.Capitalize;
+import convert.Reverse;
 import print.Horizontal;
 import print.Vertical;
 
@@ -10,12 +12,29 @@ public class Main {
     public static void main(String[] args) {
         List<String> list = Arrays.asList(args);
         List<String> word = Stream.of(list.get(0).split(" ")).collect(Collectors.toList());
-        String printOption = list.get(1);
+        String convertOption = list.get(1);
+        String printOption = list.get(2);
+        System.out.println(word + " " + convertOption + " " + printOption);
+        System.out.println(printWord(word, convertOption, printOption));
+    }
 
+    public static String printWord(List<String> word, String convertOption, String printOption) {
         if (printOption.equals("--horizontal")) {
-            System.out.println("半角つなぎ：\n" + Horizontal.print(word));
+            if (convertOption.equals("--capitalize")) {
+                return (Horizontal.print(Capitalize.convert(word)));
+            } else if (convertOption.equals("--reverse")) {
+                return (Horizontal.print(Reverse.convert(word)));
+            } else {
+                throw new RuntimeException("想定外の変化オプションです");
+            }
         } else if (printOption.equals("--vertical")) {
-            System.out.println("改行つなぎ：\n" + Vertical.print(word));
+            if (convertOption.equals("--capitalize")) {
+                return (Vertical.print(Capitalize.convert(word)));
+            } else if (convertOption.equals("--reverse")) {
+                return (Vertical.print(Reverse.convert(word)));
+            } else {
+                throw new RuntimeException("想定外の変化オプションです");
+            }
         } else {
             throw new RuntimeException("想定外の出力オプションです");
         }
