@@ -3,30 +3,38 @@ import spock.lang.Unroll
 
 @Unroll
 class MainTest extends Specification {
-    def "PrintWord"() {
+    def "ConvertOption"() {
         expect:
-        Main.printWord(word, convertOption, printOption) == exp
+        Main.convert(option, word) == exp
 
         where:
-        word               | convertOption  | printOption    | exp
-        ["hello", "world"] | "--capitalize" | "--horizontal" | "Hello World"
-        ["hello", "world"] | "--reverse"    | "--horizontal" | "world hello"
-        ["hello", "world"] | "--capitalize" | "--vertical"   | "Hello\nWorld"
-        ["hello", "world"] | "--reverse"    | "--vertical"   | "world\nhello"
+        option         | word               | exp
+        "--capitalize" | ["hello", "world"] | ["Hello", "World"]
+        "--reverse"    | ["hello", "world"] | ["world", "hello"]
     }
 
-    def "PrintWord変換例外発生"() {
+    def "ConvertOption例外発生"() {
         when:
-        Main.printWord(["hello", "world"], "--none", "--horizontal")
+        Main.convert("--none", ["hello", "world"])
 
         then:
         RuntimeException e = thrown()
         e.getMessage() == "想定外の変換オプションです"
     }
 
-    def "PrintWord出力例外発生"() {
+    def "PrintOption"() {
+        expect:
+        Main.print(option, word) == exp
+
+        where:
+        option         | word               | exp
+        "--horizontal" | ["Hello", "World"] | "Hello World"
+        "--vertical"   | ["world", "hello"] | "world\nhello"
+    }
+
+    def "PrintOption例外発生"() {
         when:
-        Main.printWord(["hello", "world"], "--reverse", "--none")
+        Main.print("--none", ["hello", "world"])
 
         then:
         RuntimeException e = thrown()
