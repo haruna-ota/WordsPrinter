@@ -35,15 +35,16 @@ public class Main {
         System.out.println("変換前：" + word);
 
         //引数の文字列に全ての変換を適用
-        for (int i = 0; i < convertOption.size(); i++) {
-            word = convert(convertOption.get(i), word);
-        }
-        System.out.println("変換後：" + word);
+//        for (int i = 0; i < convertOption.size(); i++) {
+//            word = convert(convertOption.get(i), word);
+//        }
+//        System.out.println("変換後：" + word);
 
-        System.out.println("完成：" + print(printOption, word));
+//        System.out.println("完成：" + print(printOption, word));
+        System.out.println("完成：" + printWord(word, convertOption, printOption));
     }
 
-    public static List<String> convert(String convertOption, List<String> word) {
+    private static List<String> convert(String convertOption, List<String> word) {
         if (convertOption.equals("--capitalize")) {
             return Capitalize.convert(word);
         } else if (convertOption.equals("--reverse")) {
@@ -53,7 +54,7 @@ public class Main {
         }
     }
 
-    public static String print(String printOption, List<String> word) {
+    private static String print(String printOption, List<String> word) {
         if (printOption.equals("--horizontal")) {
             return Horizontal.print(word);
         } else if (printOption.equals("--vertical")) {
@@ -61,5 +62,12 @@ public class Main {
         } else {
             throw new RuntimeException("想定外の出力オプションです");
         }
+    }
+
+    public static String printWord(List<String> word, List<String> convertOption, String printOption) {
+        for (int i = 0; i < convertOption.size(); i++) {
+            word = convert(convertOption.get(i), word);
+        }
+        return print(printOption, word);
     }
 }
